@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="page">
+    <ActionBar title="Tableau de bord Nounou" class="action-bar">
+        <ActionItem tap="{{ onLogout }}" ios.position="right" android.position="actionBar">
+            <Label text="Déconnexion" class="text-white" />
+        </ActionItem>
+    </ActionBar>
+
+    <GridLayout rows="auto, *" class="p-4">
+        <StackLayout row="0" class="mb-4">
+            <Label text="{{ 'Bonjour, ' + fullName }}" class="text-xl font-bold" />
+            <Label text="{{ isAvailable ? 'Disponible' : 'Non disponible' }}" 
+                   class="{{ isAvailable ? 'text-green-500' : 'text-red-500' }}" />
+        </StackLayout>
+
+        <TabView row="1" selectedIndex="{{ selectedTabIndex }}">
+            <TabView.items>
+                <TabViewItem title="Réservations">
+                    <TabViewItem.view>
+                        <ListView items="{{ reservations }}" class="list-group">
+                            <ListView.itemTemplate>
+                                <StackLayout class="list-group-item p-4">
+                                    <Label text="{{ familyName }}" class="font-bold" />
+                                    <Label text="{{ date }}" />
+                                    <Label text="{{ time }}" />
+                                    <Label text="{{ status }}" class="{{ statusClass }}" />
+                                </StackLayout>
+                            </ListView.itemTemplate>
+                        </ListView>
+                    </TabViewItem.view>
+                </TabViewItem>
+
+                <TabViewItem title="Disponibilités">
+                    <TabViewItem.view>
+                        <StackLayout class="p-4">
+                            <Switch checked="{{ isAvailable }}" class="mb-4" />
+                            <Label text="Définir vos disponibilités" class="font-bold mb-2" />
+                            <ListView items="{{ availabilities }}" class="list-group">
+                                <ListView.itemTemplate>
+                                    <GridLayout columns="*, auto" class="list-group-item p-4">
+                                        <Label text="{{ day }}" col="0" />
+                                        <Switch checked="{{ isAvailable }}" col="1" />
+                                    </GridLayout>
+                                </ListView.itemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </TabViewItem.view>
+                </TabViewItem>
+
+                <TabViewItem title="Profil">
+                    <TabViewItem.view>
+                        <ScrollView>
+                            <StackLayout class="p-4">
+                                <Image src="{{ profileImage }}" class="h-32 w-32 rounded-full mb-4" />
+                                <Label text="Informations personnelles" class="text-lg font-bold mb-2" />
+                                <TextField text="{{ fullName }}" hint="Nom complet" class="input mb-2" />
+                                <TextField text="{{ phone }}" hint="Téléphone" class="input mb-2" />
+                                <TextField text="{{ hourlyRate }}" hint="Tarif horaire" keyboardType="number" class="input mb-2" />
+                                <Button text="Mettre à jour" tap="{{ onUpdateProfile }}" class="btn btn-primary" />
+                            </StackLayout>
+                        </ScrollView>
+                    </TabViewItem.view>
+                </TabViewItem>
+            </TabView.items>
+        </TabView>
+    </GridLayout>
+</Page>

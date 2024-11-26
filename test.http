@@ -1,0 +1,54 @@
+### Inscription
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Marie Dubois",
+  "email": "marie@example.com",
+  "password": "password123"
+}
+
+### Connexion
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "marie@example.com",
+  "password": "password123"
+}
+
+### Obtenir tous les utilisateurs (avec token)
+GET http://localhost:3000/api/users
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### Rechercher des utilisateurs (avec token)
+GET http://localhost:3000/api/users?search=marie
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### Créer un utilisateur (avec token)
+POST http://localhost:3000/api/users
+Authorization: Bearer YOUR_TOKEN_HERE
+Content-Type: application/json
+
+{
+  "name": "Jean Dupont",
+  "email": "jean@example.com"
+}
+
+### Obtenir un utilisateur par ID (avec token)
+GET http://localhost:3000/api/users/1
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### Mettre à jour un utilisateur (avec token)
+PUT http://localhost:3000/api/users/1
+Authorization: Bearer YOUR_TOKEN_HERE
+Content-Type: application/json
+
+{
+  "name": "Marie Martin",
+  "email": "marie.martin@example.com"
+}
+
+### Supprimer un utilisateur (avec token)
+DELETE http://localhost:3000/api/users/1
+Authorization: Bearer YOUR_TOKEN_HERE

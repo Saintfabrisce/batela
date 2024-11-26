@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="page">
+    <ActionBar title="Inscription" class="action-bar" />
+    
+    <ScrollView>
+        <StackLayout class="p-4">
+            <Label text="Créer un compte" class="text-2xl font-bold mb-4 text-center" />
+            
+            <SegmentedBar selectedIndex="{{ userTypeIndex }}" class="mb-4">
+                <SegmentedBar.items>
+                    <SegmentedBarItem title="Famille" />
+                    <SegmentedBarItem title="Nounou" />
+                </SegmentedBar.items>
+            </SegmentedBar>
+            
+            <TextField hint="Nom complet" text="{{ fullName }}" class="input mb-2 p-4" />
+            <TextField hint="Email" text="{{ email }}" keyboardType="email" class="input mb-2 p-4" />
+            <TextField hint="Téléphone WhatsApp" text="{{ phone }}" keyboardType="phone" class="input mb-2 p-4" />
+            <TextField hint="Mot de passe" text="{{ password }}" secure="true" class="input mb-2 p-4" />
+            <TextField hint="Confirmer le mot de passe" text="{{ confirmPassword }}" secure="true" class="input mb-4 p-4" />
+            
+            <Button text="Prendre une photo" tap="{{ onTakePhoto }}" class="btn btn-secondary mb-2" visibility="{{ isNanny ? 'visible' : 'collapsed' }}" />
+            <Image src="{{ profileImage }}" class="h-32 w-32 mb-4 rounded-full" visibility="{{ profileImage ? 'visible' : 'collapsed' }}" />
+            
+            <Button text="S'inscrire" tap="{{ onSignup }}" class="btn btn-primary mb-2" />
+            <Button text="Déjà inscrit ? Se connecter" tap="{{ onNavigateToLogin }}" class="btn btn-secondary" />
+            
+            <ActivityIndicator busy="{{ isLoading }}" class="m-4" />
+        </StackLayout>
+    </ScrollView>
+</Page>

@@ -1,0 +1,104 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Couleurs personnalisées */
+:root {
+  --primary-blue: #1F8BCB;
+  --primary-pink: #F15286;
+  --secondary-blue: #81D4FA;
+  --secondary-pink: #FFC2D7;
+  --text-dark: #333333;
+  --text-medium: #757575;
+  --background-light: #F5F5F5;
+}
+
+/* Typographie */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-dark);
+  background-color: var(--background-light);
+}
+
+/* Classes personnalisées */
+.btn-primary {
+  @apply bg-[var(--primary-blue)] text-white font-semibold py-3 px-6 rounded-xl
+  hover:bg-opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl
+  active:transform active:scale-95;
+}
+
+.btn-secondary {
+  @apply bg-[var(--primary-pink)] text-white font-semibold py-3 px-6 rounded-xl
+  hover:bg-opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl
+  active:transform active:scale-95;
+}
+
+.input-field {
+  @apply border-2 border-gray-200 rounded-xl px-4 py-3 w-full
+  focus:ring-2 focus:ring-[var(--primary-blue)] focus:border-transparent
+  outline-none transition-all duration-200;
+}
+
+.card {
+  @apply bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl 
+  transition-shadow duration-300;
+}
+
+/* Animations */
+.hover-scale {
+  @apply transform transition-transform duration-300 hover:scale-105;
+}
+
+.fade-in {
+  @apply opacity-0 animate-[fadeIn_0.5s_ease-in_forwards];
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Styles spécifiques pour la navbar */
+.navbar {
+  @apply bg-white shadow-lg sticky top-0 z-50;
+}
+
+.navbar-link {
+  @apply flex flex-col items-center px-4 py-2 rounded-xl text-sm font-medium
+  transition-colors duration-200;
+}
+
+.navbar-link-active {
+  @apply text-[var(--primary-blue)] bg-blue-50;
+}
+
+.navbar-link-inactive {
+  @apply text-gray-500 hover:text-[var(--primary-blue)] hover:bg-blue-50;
+}

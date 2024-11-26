@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="page">
+    <ActionBar title="Tableau de bord Famille" class="action-bar">
+        <ActionItem tap="{{ onLogout }}" ios.position="right" android.position="actionBar">
+            <Label text="Déconnexion" class="text-white" />
+        </ActionItem>
+    </ActionBar>
+
+    <TabView selectedIndex="{{ selectedTabIndex }}">
+        <TabView.items>
+            <TabViewItem title="Rechercher">
+                <TabViewItem.view>
+                    <GridLayout rows="auto, *" class="p-4">
+                        <StackLayout row="0" class="mb-4">
+                            <SearchBar hint="Rechercher une nounou..." text="{{ searchQuery }}" 
+                                     submit="{{ onSearch }}" class="mb-2" />
+                            <Button text="Filtres" tap="{{ onShowFilters }}" class="btn btn-secondary" />
+                        </StackLayout>
+
+                        <ListView items="{{ nannies }}" row="1" class="list-group">
+                            <ListView.itemTemplate>
+                                <GridLayout columns="auto, *, auto" class="list-group-item p-4">
+                                    <Image src="{{ profileImage }}" width="60" height="60" 
+                                           class="rounded-full" col="0" />
+                                    <StackLayout col="1" class="ml-4">
+                                        <Label text="{{ fullName }}" class="font-bold" />
+                                        <Label text="{{ '📍 ' + distance + ' km' }}" class="text-gray-500" />
+                                        <Label text="{{ hourlyRate + ' FCFA/heure' }}" class="text-green-500" />
+                                    </StackLayout>
+                                    <Button text="Réserver" tap="{{ $parents['ListView'].onBookNanny }}" 
+                                            class="btn btn-primary" col="2" />
+                                </GridLayout>
+                            </ListView.itemTemplate>
+                        </ListView>
+                    </GridLayout>
+                </TabViewItem.view>
+            </TabViewItem>
+
+            <TabViewItem title="Réservations">
+                <TabViewItem.view>
+                    <ListView items="{{ bookings }}" class="list-group">
+                        <ListView.itemTemplate>
+                            <StackLayout class="list-group-item p-4">
+                                <GridLayout columns="auto, *">
+                                    <Image src="{{ nannyImage }}" width="50" height="50" 
+                                           class="rounded-full" col="0" />
+                                    <StackLayout col="1" class="ml-4">
+                                        <Label text="{{ nannyName }}" class="font-bold" />
+                                        <Label text="{{ date }}" class="text-gray-500" />
+                                        <Label text="{{ time }}" class="text-gray-500" />
+                                        <Label text="{{ status }}" class="{{ statusClass }}" />
+                                    </StackLayout>
+                                </GridLayout>
+                                <Button text="Annuler" tap="{{ $parents['ListView'].onCancelBooking }}"
+                                        class="btn btn-secondary mt-2" 
+                                        visibility="{{ status === 'pending' ? 'visible' : 'collapsed' }}" />
+                            </StackLayout>
+                        </ListView.itemTemplate>
+                    </ListView>
+                </TabViewItem.view>
+            </TabViewItem>
+
+            <TabViewItem title="Profil">
+                <TabViewItem.view>
+                    <ScrollView>
+                        <StackLayout class="p-4">
+                            <Label text="Informations personnelles" class="text-lg font-bold mb-4" />
+                            <TextField text="{{ fullName }}" hint="Nom complet" class="input mb-2" />
+                            <TextField text="{{ phone }}" hint="Téléphone" class="input mb-2" />
+                            <TextField text="{{ address }}" hint="Adresse" class="input mb-2" />
+                            
+                            <Label text="Enfants" class="text-lg font-bold mt-4 mb-2" />
+                            <ListView items="{{ children }}" class="mb-4">
+                                <ListView.itemTemplate>
+                                    <GridLayout columns="*, auto" class="p-2">
+                                        <StackLayout col="0">
+                                            <Label text="{{ name }}" class="font-semibold" />
+                                            <Label text="{{ age + ' ans' }}" class="text-gray-500" />
+                                        </StackLayout>
+                                        <Button text="✕" tap="{{ $parents['ListView'].onRemoveChild }}" 
+                                                class="btn btn-secondary" col="1" />
+                                    </GridLayout>
+                                </ListView.itemTemplate>
+                            </ListView>
+                            
+                            <Button text="Ajouter un enfant" tap="{{ onAddChild }}" 
+                                    class="btn btn-secondary mb-4" />
+                            <Button text="Mettre à jour" tap="{{ onUpdateProfile }}" 
+                                    class="btn btn-primary" />
+                        </StackLayout>
+                    </ScrollView>
+                </TabViewItem.view>
+            </TabViewItem>
+        </TabView.items>
+    </TabView>
+</Page>

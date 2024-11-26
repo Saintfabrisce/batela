@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="page">
+    <ActionBar title="Ajouter un enfant" class="action-bar">
+        <NavigationButton text="Retour" android.systemIcon="ic_menu_back" />
+    </ActionBar>
+
+    <StackLayout class="p-4">
+        <TextField hint="Nom de l'enfant" text="{{ name }}" class="input mb-4 p-4" />
+        
+        <Label text="Date de naissance" class="mb-2" />
+        <DatePicker date="{{ birthDate }}" class="mb-4" />
+        
+        <Label text="Informations médicales" class="mb-2" />
+        <TextView hint="Allergies, conditions médicales, etc." text="{{ medicalInfo }}" 
+                 class="input mb-4 p-4" height="100" />
+        
+        <Label text="Besoins spéciaux" class="mb-2" />
+        <TextView hint="Régime alimentaire, habitudes, etc." text="{{ specialNeeds }}" 
+                 class="input mb-4 p-4" height="100" />
+        
+        <Button text="Ajouter" tap="{{ onAddChild }}" class="btn btn-primary mb-2" 
+                isEnabled="{{ !isLoading }}" />
+        
+        <ActivityIndicator busy="{{ isLoading }}" class="m-4" />
+    </StackLayout>
+</Page>

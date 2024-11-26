@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="page">
+    <ActionBar title="Réservation" class="action-bar">
+        <NavigationButton text="Retour" android.systemIcon="ic_menu_back" />
+    </ActionBar>
+
+    <ScrollView>
+        <StackLayout class="p-4">
+            <!-- Informations de la nounou -->
+            <GridLayout columns="auto, *" class="mb-4">
+                <Image src="{{ nanny.profileImage }}" width="80" height="80" 
+                       class="rounded-full" col="0" />
+                <StackLayout col="1" class="ml-4">
+                    <Label text="{{ nanny.fullName }}" class="text-xl font-bold" />
+                    <Label text="{{ nanny.hourlyRate + ' FCFA/heure' }}" class="text-green-500" />
+                </StackLayout>
+            </GridLayout>
+
+            <!-- Date et heure -->
+            <Label text="Date et heure" class="text-lg font-bold mb-2" />
+            <DatePicker date="{{ date }}" class="mb-2" />
+            <TimePicker time="{{ time }}" class="mb-4" />
+
+            <!-- Durée -->
+            <Label text="Durée (heures)" class="text-lg font-bold mb-2" />
+            <TextField text="{{ duration }}" keyboardType="number" 
+                      hint="Nombre d'heures" class="input mb-4" />
+
+            <!-- Enfants -->
+            <Label text="Sélectionner les enfants" class="text-lg font-bold mb-2" />
+            <ListView items="{{ children }}" class="mb-4">
+                <ListView.itemTemplate>
+                    <GridLayout columns="*, auto" class="p-2">
+                        <Label text="{{ name + ' (' + age + ' ans)' }}" col="0" />
+                        <Switch checked="{{ isSelected }}" col="1" />
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+
+            <!-- Instructions spéciales -->
+            <Label text="Instructions spéciales" class="text-lg font-bold mb-2" />
+            <TextView text="{{ specialInstructions }}" hint="Instructions pour la nounou..."
+                      class="input mb-4" height="100" />
+
+            <!-- Récapitulatif -->
+            <StackLayout class="bg-gray-100 p-4 rounded-lg mb-4">
+                <Label text="Récapitulatif" class="text-lg font-bold mb-2" />
+                <Label text="{{ 'Durée: ' + duration + ' heures' }}" />
+                <Label text="{{ 'Tarif horaire: ' + nanny.hourlyRate + ' FCFA' }}" />
+                <Label text="{{ 'Total: ' + totalAmount + ' FCFA' }}" class="text-green-500 font-bold" />
+            </StackLayout>
+
+            <!-- Mode de paiement -->
+            <Label text="Mode de paiement" class="text-lg font-bold mb-2" />
+            <ListPicker items="{{ paymentMethods }}" selectedIndex="{{ selectedPaymentMethodIndex }}" 
+                       class="mb-4" />
+
+            <!-- Bouton de réservation -->
+            <Button text="Confirmer la réservation" tap="{{ onConfirmBooking }}" 
+                    class="btn btn-primary mb-2" isEnabled="{{ !isLoading }}" />
+            
+            <ActivityIndicator busy="{{ isLoading }}" class="m-4" />
+        </StackLayout>
+    </ScrollView>
+</Page>
